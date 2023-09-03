@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: "{{ .Chart.Name }}-server"
+    labels:
+        app: "{{ .Chart.Name }}"
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+        release: "{{ .Release.Name }}"
+        heritage: "{{ .Release.Service }}"
+spec:
+    replicas: {{ .Values.replicaCount }}
+    selector:
+        matchLabels:
+            app: "{{ .Chart.Name }}"
+            release: "{{ .Release.Name }}"
+    template:
+        metadata:
+          labels:
+            app: "{{ .Chart.Name }}"
+            release: "{{ .Release.Name }}"
+        spec:
+            containers:
+            - name: "{{ .Chart.Name }}"
+              image: "{{ .Values.image }}:{{ .Values.imageTag}}"
+              imagePullPolicy: Always
+              resources:
+                requests:
+                    memory: "{{ .Values.resources.requests.memory }}"
+                    cpu: "{{ .Values.resources.requests.cpu }}"
+              env:
+              - name: SERVERNAME
+                value: "{{ .Values.env.serverName }}"
+              - name: PORT
+                value: "{{ .Values.env.gamePort }}"
+              - name: QUERYPORT
+                value: "{{ .Values.env.queryPort }}"
+              - name: JOIN_PASSWORD
+                value: "{{ .Values.env.joinPassword }}"
+              - name: MAX_PLAYERS
+                value: "{{ .Values.env.maxPlayers }}"
+              - name: ADMIN_PASSWORD
+                value: "{{ .Values.env.adminPassword }}"
+              - name: SHUTDOWN_NOT_JOINED_FOR
+                value: "{{ .Values.env.shutdownNotJoinedFor }}"
+              - name: SHUTDOWN_EMPTY_FOR
+                value: "{{ .Values.env.shutdownEmptyFor }}"
+              - name: ALLOW_NON_ADMINS_LAUNCH
+                value: "{{ .Values.env.allowNonAdminsLaunch }}"
+              - name: ALLOW_NON_ADMINS_DELETE
+                value: "{{ .Values.env.allowNonAdminsDelete }}"
+              - name: LOAD_PROSPECT
+                value: "{{ .Values.env.loadProspect }}"
+              - name: CREATE_PROSPECT
+                value: "{{ .Values.env.createProspect }}"
+              - name: RESUME_PROSPECT
+                value: "{{ .Values.env.resumeProspect }}"
+              - name: STEAM_USERID
+                value: "{{ .Values.env.steamUserID }}"
+              - name: STEAM_GROUPID
+                value: "{{ .Values.env.steamGroupID }}"
+              - name: STEAM_ASYNC_TIMEOUT
+                value: "{{ .Values.env.steamAsyncTimeout }}"
+              - name: BRANCH
+                value: "{{ .Values.env.branch }}"
+              ports:
+              - name: game-port
+                containerPort: {{ .Values.env.gamePort | int }}
+                protocol: UDP
+              - name: query-port
+                containerPort: {{ .Values.env.queryPort | int }}
+                protocol: UDP
+              volumeMounts:
+              - name: icarus-data
+                mountPath: /game/icarus
+              - name: icarus-config
+                mountPath: /home/steam/.wine/drive_c/icarus
+            volumes:
+            - name: icarus-data
+              persistentVolumeClaim:
+                claimName: "{{ .Chart.Name }}-pvc-data"
+            - name: icarus-config
+              persistentVolumeClaim:
+                claimName: "{{ .Chart.Name }}-pvc-config"
