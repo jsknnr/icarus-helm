@@ -1,0 +1,15 @@
+apiVersion: v1
+name: icarus
+version: 1.0.0
+appVersion: public
+description: Icarus dedicated server.
+keywords:
+- game
+- server
+- icarus
+home: https://surviveicarus.com/
+sources:
+- https://gitlab.com/fred-beauch/icarus-dedicated-server
+maintainers:
+  - name: jsknnr
+    url: https://github.com/jsknnr
