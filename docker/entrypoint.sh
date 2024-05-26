@@ -13,7 +13,7 @@ steamcmd +@sSteamCmdForcePlatformType windows +force_install_dir "$ICARUS_PATH" 
 
 # Check that steamcmd was successful
 if [ $? != 0 ]; then
-    echo "$(timestamp) ERROR: steamcmd was unable to successfully initialize and update Enshrouded"
+    echo "$(timestamp) ERROR: steamcmd was unable to successfully initialize and update Icarus"
     exit 1
 fi
 
@@ -68,7 +68,6 @@ serverSettingsIni="${configPath}/ServerSettings.ini"
 if [[ ! -e ${serverSettingsIni} ]]; then
   touch ${serverSettingsIni}
 fi
-chown -R "${STEAM_USERID}":"${STEAM_GROUPID}" ${serverSettingsIni}
 
 if ! grep -Fq "[/Script/Icarus.DedicatedServerSettings]" ${serverSettingsIni}
 then
@@ -114,8 +113,8 @@ ${STEAM_PATH}/compatibilitytools.d/GE-Proton${GE_PROTON_VERSION}/proton run ${IC
  # Find pid for IcarusServer-Win64-Shipping.exe
 timeout=0
 while [ $timeout -lt 11 ]; do
-    if ps -e | grep "IcarusServer-Win64-Shipping.exe"; then
-        icarus_pid=$(ps -e | grep "IcarusServer-Win64-Shipping.exe" | awk '{print $1}')
+    if ps -e | grep "IcarusServer-Wi"; then
+        icarus_pid=$(ps -e | grep "IcarusServer-Wi" | awk '{print $1}')
         break
     elif [ $timeout -eq 10 ]; then
         echo "$(timestamp) ERROR: Timed out waiting for IcarusServer-Win64-Shipping.exe to be running"
