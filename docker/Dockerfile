@@ -65,7 +65,7 @@ RUN groupadd -g $CONTAINER_GID steam \
 USER steam
 
 RUN mkdir "$ICARUS_PATH" \
-    && mkdir -p "${ICARUS_PATH}/Saved/Config/WindowsServer" \
+    && mkdir -p "${ICARUS_PATH}/Icarus/Saved/Config/WindowsServer" \
     && mkdir -p "${STEAM_PATH}/compatibilitytools.d" \
     && mkdir -p "${STEAM_PATH}/steamapps/compatdata/${STEAM_APP_ID}" \
     && mkdir -p "${HOME}/.steam" \
