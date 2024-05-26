@@ -1,4 +1,4 @@
-image: nerodon/icarus-dedicated
+image: sknnr/icarus-dedicated-server
 imageTag: latest
 # serviceType should be LoadBalancer or NodePort
 serviceType: LoadBalancer
