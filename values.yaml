@@ -21,10 +21,7 @@ env:
   shutdownEmptyFor: -1
   allowNonAdminsLaunch: True
   allowNonAdminsDelete: False
-  loadProspect:
-  createProspect:
+  loadProspect: False
+  createProspect: False
   resumeProspect: True
-  steamUserID: 1000
-  steamGroupID: 1000
-  steamAsyncTimeout: 60
-  branch: public
+  steamAsyncTimeout: 120

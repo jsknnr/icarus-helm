@@ -54,10 +54,6 @@ spec:
                 value: "{{ .Values.env.createProspect }}"
               - name: RESUME_PROSPECT
                 value: "{{ .Values.env.resumeProspect }}"
-              - name: STEAM_USERID
-                value: "{{ .Values.env.steamUserID }}"
-              - name: STEAM_GROUPID
-                value: "{{ .Values.env.steamGroupID }}"
               - name: STEAM_ASYNC_TIMEOUT
                 value: "{{ .Values.env.steamAsyncTimeout }}"
               ports:
