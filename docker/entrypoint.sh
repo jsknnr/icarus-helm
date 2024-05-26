@@ -20,7 +20,7 @@ fi
 # Check for proper save permissions
 if ! touch "${ICARUS_PATH}/Icarus/Saved/Config/WindowsServer/test"; then
     echo ""
-    echo "$(timestamp) ERROR: The ownership of /home/steam/icarus/Icarus/Saved/Config/WindowsServer is not correct and the server will not be able to save..."
+    echo "$(timestamp) ERROR: The ownership of ${ICARUS_PATH}/Icarus/Saved/Config/WindowsServer is not correct and the server will not be able to save..."
     echo "the directory that you are mounting into the container needs to be owned by 10000:10000"
     echo "from your container host attempt the following command 'chown -R 10000:10000 /your/icarus/folder'"
     echo ""
@@ -109,7 +109,7 @@ ${STEAM_PATH}/compatibilitytools.d/GE-Proton${GE_PROTON_VERSION}/proton run ${IC
   -SteamServerName="${SERVERNAME}" \
   -PORT="${PORT}" \
   -QueryPort="${QUERYPORT}" \
- &
+  &
 
  # Find pid for IcarusServer-Win64-Shipping.exe
 timeout=0
