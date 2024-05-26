@@ -9,8 +9,6 @@ resources:
 volumes:
   dataPVC:
     size: 50Gi
-  configPVC:
-    size: 50Gi
   storageClassName: ""
 env:
   serverName: Icarus Kubernetes Server
