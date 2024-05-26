@@ -1,4 +1,4 @@
-image: nerodon/icarus-dedicated
+image: sknnr/icarus-dedicated-server
 imageTag: latest
 # serviceType should be LoadBalancer or NodePort
 serviceType: LoadBalancer
@@ -8,8 +8,6 @@ resources:
     cpu: 8.0
 volumes:
   dataPVC:
-    size: 50Gi
-  configPVC:
     size: 50Gi
   storageClassName: ""
 env:
@@ -23,10 +21,7 @@ env:
   shutdownEmptyFor: -1
   allowNonAdminsLaunch: True
   allowNonAdminsDelete: False
-  loadProspect:
-  createProspect:
+  loadProspect: False
+  createProspect: False
   resumeProspect: True
-  steamUserID: 1000
-  steamGroupID: 1000
-  steamAsyncTimeout: 60
-  branch: public
+  steamAsyncTimeout: 120

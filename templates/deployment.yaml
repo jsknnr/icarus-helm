@@ -54,14 +54,8 @@ spec:
                 value: "{{ .Values.env.createProspect }}"
               - name: RESUME_PROSPECT
                 value: "{{ .Values.env.resumeProspect }}"
-              - name: STEAM_USERID
-                value: "{{ .Values.env.steamUserID }}"
-              - name: STEAM_GROUPID
-                value: "{{ .Values.env.steamGroupID }}"
               - name: STEAM_ASYNC_TIMEOUT
                 value: "{{ .Values.env.steamAsyncTimeout }}"
-              - name: BRANCH
-                value: "{{ .Values.env.branch }}"
               ports:
               - name: game-port
                 containerPort: {{ .Values.env.gamePort | int }}
@@ -71,13 +65,8 @@ spec:
                 protocol: UDP
               volumeMounts:
               - name: icarus-data
-                mountPath: /game/icarus
-              - name: icarus-config
-                mountPath: /home/steam/.wine/drive_c/icarus
+                mountPath: /home/steam/icarus/Icarus/Saved
             volumes:
             - name: icarus-data
               persistentVolumeClaim:
                 claimName: "{{ .Chart.Name }}-pvc-data"
-            - name: icarus-config
-              persistentVolumeClaim:
-                claimName: "{{ .Chart.Name }}-pvc-config"
